@@ -70,9 +70,23 @@ public class PostagemController {
 			 if(temaRepository.existsById(postagem.getTema().getId()))
 				 return ResponseEntity.status(HttpStatus.OK)
 						 .body(postagemRepository.save(postagem));
-			 return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+			 
+			 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 			 
 		 }
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		 
+	 }
+	 
+	 @ResponseStatus(HttpStatus.NO_CONTENT)
+	 @DeleteMapping("/(id)")
+	 public void delete(@PathVariable Long id) {
+		 Optional<Postagem> postagem = PostagemRepository.findById(id);
+		 if(postagem.isEmpty());
+			 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	        postagemRepository.deleteById(id);
+		 
+	 }
+		
     	  
-}*/
 }
