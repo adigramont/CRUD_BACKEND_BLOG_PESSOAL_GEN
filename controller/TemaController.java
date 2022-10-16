@@ -1,6 +1,7 @@
 package com.generation.blogpessoal.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -22,7 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.generation.blogpessoal.model.Tema;
 import com.generation.blogpessoal.repository.TemaRepository;
 
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
+
 
 @RestController
 @RequestMapping("/temas")
@@ -66,7 +67,7 @@ public class TemaController {
 	.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	/*
+	//importar sempre java.util no Optional
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
@@ -75,5 +76,5 @@ public class TemaController {
 	throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	temaRepository.deleteById(id);
 
-	}*/
+	}
 }

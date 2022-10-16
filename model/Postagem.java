@@ -30,12 +30,12 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@Size(min = 5, max = 50)
+	@NotBlank (message = "o atributo titulo é obrigatório!")
+	@Size(min = 5, max = 1000, message = "o atributo titulo deve conter no minimo 05 e no maximo 1000 caracteres")
 	private String titulo;
 
-	@NotBlank
-	@Size(min = 10, max = 1000)
+	@NotBlank (message = "o atributo texto é obrigatório")
+	@Size(min = 10, max = 1000, message = "o atributo texto deve conter no minimo 10 e no maximo 1000 caracteres")
 	private String texto;
 
 	@UpdateTimestamp
@@ -45,9 +45,12 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -55,7 +58,7 @@ public class Postagem {
 	}
 
 	public String getTitulo() {
-		return titulo;
+		return this.titulo;
 	}
 
 	public void setTitulo(String titulo) {
@@ -63,16 +66,15 @@ public class Postagem {
 	}
 
 	public String getTexto() {
-		return texto;
+		return this.texto;
 	}
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-		
 	}
 
 	public LocalDateTime getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(LocalDateTime data) {
@@ -80,13 +82,23 @@ public class Postagem {
 	}
 
 	public Tema getTema() {
-		return tema;
+		return this.tema;
 	}
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	
+	}
 	
-}
+	
+

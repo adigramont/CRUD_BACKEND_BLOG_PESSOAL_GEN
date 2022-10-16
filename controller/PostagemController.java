@@ -1,6 +1,7 @@
 package com.generation.blogpessoal.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,7 +24,7 @@ import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.repository.PostagemRepository;
 import com.generation.blogpessoal.repository.TemaRepository;
 
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
+
 
 @RestController
 @RequestMapping("/postagens")
@@ -79,10 +80,10 @@ public class PostagemController {
 	 }
 	 
 	 @ResponseStatus(HttpStatus.NO_CONTENT)
-	 @DeleteMapping("/(id)")
+	 @DeleteMapping("/{id}")
 	 public void delete(@PathVariable Long id) {
-		 Optional<Postagem> postagem = PostagemRepository.findById(id);
-		 if(postagem.isEmpty());
+		 Optional<Postagem> postagem = postagemRepository.findById(id);
+		 if(postagem.isEmpty())
 			 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	        postagemRepository.deleteById(id);
 		 
